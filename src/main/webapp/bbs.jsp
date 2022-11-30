@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale="1">
 
-<title>SW 프로젝트</title>
+<title>Sketch & Photo</title>
 <style type="text/css">
 	a, a:hover {
 	color: #000000;
@@ -40,7 +40,7 @@
 	%>
      <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="main.jsp">Sketch & Photo</a>
+                <a class="navbar-brand" href="main.jsp" style="margin-left:-100px;">Sketch & Photo</a>
                
                 
                  <%
@@ -133,14 +133,13 @@
 			<a href="write.jsp" class="btn btn-dark" style="width:100px; margin-left:1220px;">글쓰기</a>
 		</div>
 	</div>
-	
 	<!--  검색 부분 -->
     <div class="container">
 		<div class="row">
 			<form method="post"  action="searchbbs.jsp">
-				<table class="pull-right">
+				<table class="pull-right" style="margin-left:-14px">
 					<tr>
-						<td><select class="form-control" name="searchField">
+						<td><select class="form-control" name="searchField" >
 								<option value="0">선택</option>
 								<option value="bbsTitle">제목</option>
 								<option value="userID">작성자</option>

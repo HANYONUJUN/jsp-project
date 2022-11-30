@@ -12,7 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width" initial-scale="1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<title>JSP 게시판 웹 사이트</title>
+<title>Sketch & Photo</title>
 </head>
 <body>
 	<% 
@@ -45,17 +45,13 @@
 			script.println("</script>");	
 		}
 		Bbs bbs=new BbsDAO().getBbs(bbsID);	
-		session.setAttribute("bbsID",bbs.getBbsID());
-		
-		Reply reply= new ReplyDAO().getReply(replyID);
-		session.setAttribute("replyID", reply.getReplyID());
-		
+		session.setAttribute("bbsID",bbs.getBbsID());	
 	%>
 	
 	
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Sketch & Photo</a>
+                <a class="navbar-brand" href="main.jsp"style="margin-left:-100px;">Sketch & Photo</a>
                
                 
                  <%
@@ -89,7 +85,7 @@
 	
 	<div class="container">
 		<div class="row">
-			<table class="table table-striped" style="text-align:center; border :3px solid black; margin-top:50px" > <%-- 홀,짝 행 구분 --%>
+			<table class="table table-striped" style="text-align:center; border :3px solid black; margin-top:50px" > 
 				<thead>
 					<tr>
 						<th colspan="3" style="background-color : #eeeeeee; text-align:center;">게시판 글 보기</th>
@@ -110,9 +106,13 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td colspan="2" style="min-height: 200px; ">
+						<td><%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+					</tr>
+					<tr>
+					    <td>
+					      <td colspan="2" style="min-height: 200px; ">
 						<img style="height:330px; margin-top:50px" src="<%=bbs.getFileName()%>">
-						<%= bbs.getBbsContent().replaceAll(" ", "&nbsp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("\n", "<br>") %></td>
+					    </td>
 					</tr>
 				</tbody>
 			</table>
@@ -139,7 +139,7 @@
 							<td style="text-align: center;"><%= list.get(i).getReplyContent() %></td>
 							<td style="text-align: right;"><%= list.get(i).getUserID() %>
 						
-							<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="ReplydeleteAction.jsp?replyID=<%=list.get(i).getReplyID()%>">삭제</a>
+							<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="ReplydeleteAction.jsp?replyID=<%=list.get(i).getReplyID()%>" style="text-decoration:none; color:black;">삭제</a>
 						
 							</td>
 						</tr>
@@ -150,23 +150,22 @@
 						
 						
 						<td style="border-bottom:none;" valign="middle"><%= userID %></td>
-						
 						<td>
 						<textarea type="text" class="form-control"placeholder="댓글을 입력하세요." name="replyContent" maxlength="2048"></textarea>
 						</td>
 					</tbody>
 				</table>
-				 <td style="text-align:right;"><input type="submit" class="btn-dark" value="댓글입력" style="margin-left:1220px;"></td>
+				<td style="text-align:right;"><input type="submit" class="btn-dark" value="댓글입력" style="margin-left:1220px;"></td>
 				</form>
 				
 				
-			<div class="d-grid gap-2 d-md-block" style="margin-top:-1px;">
-			<a href="bbs.jsp" class="btn btn-outline-dark" style="width:100px; margin-left:-10px;">목록</a>
+			<div class="d-grid gap-2 d-md-block" style="margin-top:-10px;">
+			<a href="bbs.jsp" class="btn btn-outline-dark btn-sm" style="width:100px; margin-left:-10px;">목록</a>
 			<%
 				if(userID != null && userID.equals(bbs.getUserID())) {
 			%>
-					<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-outline-dark" style="width:100px">수정</a>
-					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-outline-dark" style="width:100px">삭제</a>
+					<a href="update.jsp?bbsID=<%= bbsID %>" class="btn btn-outline-dark btn-sm" style="width:100px">수정</a>
+					<a onclick="return confirm('정말로 삭제하시겠습니까?')" href="deleteAction.jsp?bbsID=<%= bbsID %>" class="btn btn-outline-dark btn-sm" style="width:100px">삭제</a>
 			<%
 				}
 			%>
